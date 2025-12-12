@@ -1,0 +1,45 @@
+"use client";
+import { useState, useEffect } from "react";
+
+interface Props {
+  onChange: (value: string) => void;
+}
+
+export default function MarkdownInput({ onChange }: Props) {
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    if (!value) return;
+
+    const timeout = setTimeout(() => {
+      fetch("/api/pages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: "Page auto-save",
+          content: value,
+        }),
+      });
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [value]);
+
+  return (
+    <div className="flex flex-col gap-2">
+      <textarea
+        className="border px-3 py-2 rounded min-h-[200px]"
+        placeholder="Écris du rmarkdown ici..."
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onChange(e.target.value); // ← renvoie le texte au parent
+        }}
+      />
+
+      <p className="text-sm text-gray-600">
+        Valeur actuelle : <strong>{value}</strong>
+      </p>
+    </div>
+  );
+}
