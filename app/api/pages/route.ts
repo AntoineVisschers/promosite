@@ -1,23 +1,33 @@
 import { NextResponse } from "next/server";
 import { sanityClient, writeClient } from "../../../lib/sanityClient";
 
+const docId = "markdownPage-live";
+
 export async function GET() {
   try {
-    const pages = await sanityClient.fetch(
-      `*[_type == "markdownPage"]{title, content}`
-    );
-    return NextResponse.json({ pages });
+    const pages = await sanityClient.fetch(`
+    *[_type == "markdownPage"]{
+      title,
+      slug
+    }
+  `);
+
+    // Si doc existe renvoyer objet complet, sinon empty
+    return NextResponse.json({ success: true, pages: pages || null });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    console.error(err);
+    return NextResponse.json(
+      { success: false, error: String(err) },
+      { status: 500 }
+    );
   }
 }
 
 export async function POST(req: Request) {
   const { title, content } = await req.json();
-  const docId = "markdownPage-live";
 
   try {
-    const doc = await writeClient.createOrReplace({
+    const pages = await writeClient.createOrReplace({
       _id: docId,
       _type: "markdownPage",
       title,
@@ -28,7 +38,7 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({ ok: true, doc });
+    return NextResponse.json({ ok: true, pages });
   } catch (err) {
     console.error(err);
     return NextResponse.json(
