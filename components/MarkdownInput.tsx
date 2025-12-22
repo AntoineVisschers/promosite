@@ -17,6 +17,7 @@ export default function MarkdownInput({ onChange }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: "Page auto-save",
+          slug: "page-auto-save",
           content: value,
         }),
       });
@@ -36,10 +37,6 @@ export default function MarkdownInput({ onChange }: Props) {
           onChange(e.target.value); // ← renvoie le texte au parent
         }}
       />
-
-      <p className="text-sm text-gray-600">
-        Valeur actuelle : <strong>{value}</strong>
-      </p>
     </div>
   );
 }

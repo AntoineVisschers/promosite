@@ -10,7 +10,7 @@ export async function GET(
       `
       *[_type == "markdownPage" && slug.current == $slug][0]{
         title,
-        content
+        "content": content.code
       }
       `,
       { slug: params.slug }

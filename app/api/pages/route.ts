@@ -31,6 +31,7 @@ export async function POST(req: Request) {
       _id: docId,
       _type: "markdownPage",
       title,
+      slug: { _type: "slug", current: "live" },
       content: {
         _type: "code",
         code: content,

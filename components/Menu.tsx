@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Page } from "../types/Page";
+import { Page } from "../content/types/Page";
 
 export default function Menu() {
   const [pages, setPages] = useState<Page[]>([]);

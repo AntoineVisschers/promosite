@@ -15,21 +15,26 @@ export default function Page() {
     const data = await res.json();
     console.log("Données chargées depuis Sanity :", data);
     setSanityMarkdown(data?.doc?.content?.code || "");
+    setLocalMarkdown(data?.doc?.content?.code || "");
   };
 
   useEffect(() => {
     loadSanityContent();
-  }, [localMarkdown]);
+  }, []);
 
   return (
     <main className="p-6">
       <MarkdownPagesList />
       <h1 className="text-3xl font-bold mb-4">Prévisualisateur Markdown</h1>
 
-      <MarkdownInput onChange={(val) => setLocalMarkdown(val)} />
+      <MarkdownInput
+        onChange={(val) => {
+          setLocalMarkdown(val);
+        }}
+      />
 
       <h2 className="text-xl font-semibold mt-6 mb-2">Prévisualisation HTML</h2>
-      <MarkdownViewer text={sanityMarkdown} />
+      <MarkdownViewer text={localMarkdown} />
 
       <div className="mt-6">
         <Link href="/api/pages">Voir endpoint API pages (backend Sanity)</Link>
