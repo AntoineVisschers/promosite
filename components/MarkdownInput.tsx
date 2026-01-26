@@ -3,10 +3,15 @@ import { useState, useEffect } from "react";
 
 interface Props {
   onChange: (value: string) => void;
+  localValue: string;
 }
 
-export default function MarkdownInput({ onChange }: Props) {
-  const [value, setValue] = useState("");
+export default function MarkdownInput({ onChange, localValue }: Props) {
+  const [value, setValue] = useState(localValue);
+
+  useEffect(() => {
+    setValue(localValue);
+  }, [localValue]);
 
   useEffect(() => {
     if (!value) return;

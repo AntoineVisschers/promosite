@@ -18,4 +18,22 @@ export type CardToken = {
   };
 };
 
-export type Token = TextToken | AlertToken | CardToken;
+export type TitleToken = {
+  type: "title";
+  props: {
+    level: 1 | 2 | 3 | 4 | 5 | 6;
+  };
+  children: Token[];
+};
+
+export type EmphaseToken = {
+  type: "emphase";
+  children: Token[];
+};
+
+export type Token =
+  | TextToken
+  | AlertToken
+  | CardToken
+  | TitleToken
+  | EmphaseToken;

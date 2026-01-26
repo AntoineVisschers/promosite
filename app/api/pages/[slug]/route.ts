@@ -5,15 +5,17 @@ export async function GET(
   _req: Request,
   { params }: { params: { slug: string } }
 ) {
+  const docId = "markdownPage-live";
   try {
     const page = await sanityClient.fetch(
       `
-      *[_type == "markdownPage" && slug.current == $slug][0]{
+      *[_type == "markdownPage" && _id == $docId && slug.current == $slug][0]{
         title,
+        slug,
         "content": content.code
       }
       `,
-      { slug: params.slug }
+      { docId, slug: params.slug }
     );
 
     return NextResponse.json({ page });

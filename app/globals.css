@@ -2,8 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* optional: prose max width */
 .prose {
-max-width: none;
+  max-width: none;
+}
+
+/* Composants sémantiques */
+.title-h1 {
+  @apply font-bold mb-4;
+  font-size: calc(1.5rem - 0.25rem * (1 - 1));
+  line-height: calc(2rem - 0.25rem * (1 - 1));
+}
+
+.title-h2 {
+  @apply font-bold mb-4;
+  font-size: calc(1.5rem - 0.25rem * (2 - 1));
+  line-height: calc(2rem - 0.25rem * (2 - 1));
+}
+
+.title-h3 {
+  @apply font-bold mb-4;
+  font-size: calc(1.5rem - 0.25rem * (3 - 1));
+  line-height: calc(2rem - 0.25rem * (3 - 1));
+}
+
+.title-h4 {
+  @apply font-bold mb-4;
+  font-size: calc(1.5rem - 0.25rem * (4 - 1));
+  line-height: calc(2rem - 0.25rem * (4 - 1));
+}
+
+.title-h5 {
+  @apply font-bold mb-4;
+  font-size: calc(1.5rem - 0.25rem * (5 - 1));
+  line-height: calc(2rem - 0.25rem * (5 - 1));
+}
+
+.title-h6 {
+  @apply font-bold mb-4;
+  font-size: calc(1.5rem - 0.25rem * (6 - 1));
+  line-height: calc(2rem - 0.25rem * (6 - 1));
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-md p-4 max-w-sm;
+}
+
+.btn-primary {
+  @apply px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors;
+}
+
+/* Editor */
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
 }
